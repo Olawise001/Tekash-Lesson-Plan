@@ -463,27 +463,22 @@
     }
   }
 
-  @media (max-width: 760px) {
-    .form-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .presentation-table {
-      font-size: 12px;
-    }
-  }
   /* Horizontal scroll for tables on small screens */
 .table-wrap {
   width: 100%;
   overflow-x: auto;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 }
 
 /* Force table to keep its full width */
 .presentation-table {
-  min-width: 900px;
+  min-width: 950px;
+  width: max-content;
   border-collapse: collapse;
 }
+.presentation-table th,
 .presentation-table td {
   white-space: normal;
   word-break: break-word;
@@ -1439,7 +1434,16 @@ function renderLessonPlan(payload) {
 
 function getPlanText() {
   const editor = document.querySelector(".lesson-editor");
-  return editor ? editor.innerText.trim() : "";
+  if (editor && editor.innerText.trim()) {
+    return editor.innerText.trim();
+  }
+
+  const outBody = document.getElementById("outBody");
+  if (outBody && outBody.innerText.trim()) {
+    return outBody.innerText.trim();
+  }
+
+  return "";
 }
 
 function copyPlan() {
@@ -1472,13 +1476,22 @@ function printPlan() {
 }
 
 function saveAsPDF() {
-  const text = getPlanText();
-  if (!text) {
+  const editor = document.querySelector(".lesson-editor");
+  if (!editor || !editor.innerText.trim()) {
     alert("Generate or edit a lesson plan first.");
     return;
   }
-  alert("Your browser print window will open. Choose 'Save as PDF' as the destination.");
-  window.print();
+
+  const opt = {
+    margin: 0.4,
+    filename: "lesson-plan.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["css", "legacy"] }
+  };
+
+  html2pdf().set(opt).from(editor).save();
 }
 
 function submitToEmail() {
@@ -1542,5 +1555,6 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>
