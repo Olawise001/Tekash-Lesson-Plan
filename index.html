@@ -472,6 +472,27 @@
       font-size: 12px;
     }
   }
+  /* Horizontal scroll for tables on small screens */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Force table to keep its full width */
+.presentation-table {
+  min-width: 900px;
+  border-collapse: collapse;
+}
+.presentation-table td {
+  white-space: normal;
+  word-break: break-word;
+  vertical-align: top;
+}
+.presentation-table td[contenteditable="true"] {
+  min-width: 180px;
+  min-height: 60px;
+}
 </style>
 </head>
 <body>
@@ -803,7 +824,11 @@ function getDefaultPresentationRows(includeLearningStrategy = true) {
 function getPresentationTableHtml(stepRowsHtml = "", includeLearningStrategy = true) {
   return `
     <h3>Presentation/Outline</h3>
-    <table class="presentation-table" id="presentationTable">
+    <div class="table-wrap">
+  <table class="presentation-table" id="presentationTable">
+    ...
+  </table>
+</div>
       <thead>
         <tr>
           <th>Step</th>
