@@ -1,0 +1,38 @@
+{
+  "id": "/lesson-plan.html",
+  "name": "Lesson Plan Generator",
+  "short_name": "Lesson Plan",
+  "start_url": "/lesson-plan.html",
+  "display": "standalone",
+  "background_color": "#faf8f3",
+  "theme_color": "#1a3c2e",
+  "description": "AI and offline lesson plan generator for teachers.",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-wide.png",
+      "sizes": "1366x768",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop view of the lesson plan generator"
+    },
+    {
+      "src": "/screenshots/mobile-narrow.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of the lesson plan generator"
+    }
+  ]
+}
