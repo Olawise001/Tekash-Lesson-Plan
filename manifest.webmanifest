@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Lesson Plan Generator",
   "short_name": "Lesson Plan",
-  "start_url": "/lesson-plan.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#faf8f3",
   "theme_color": "#1a3c2e",
