@@ -972,7 +972,7 @@ async function generate() {
   if (!validateRequiredFields(values, "Please fill in Week, Teacher's Name, Subject, Class, and Topic before generating.")) {
     return;
   }
-}
+  
   const err = document.getElementById("errMsg");
   const btn = document.getElementById("genBtn");
   const card = document.getElementById("outputCard");
@@ -1561,6 +1561,7 @@ document.getElementById("manualBtn");
   if (manualBtn) manualBtn.onclick = 
 renderManualTemplate;
 });
+}
 </script>
 
 <script>
