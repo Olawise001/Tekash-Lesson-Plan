@@ -1532,7 +1532,8 @@ function generateNew() {
 function saveDraftLocally() {
   const editor = document.querySelector(".lesson-editor");
   if (!editor) return;
-  localStorage.setItem("lesson-plan-draft", editor.innerHTML);
+  localStorage.setItem("lesson-plan-draft", 
+editor.outerHTML);
 }
 
 function restoreDraftLocally() {
@@ -1548,10 +1549,18 @@ function restoreDraftLocally() {
   }
 }
 
-window.addEventListener("load", restoreDraftLocally);
+window.addEventListener("load", () => {
+  restoreDraftLocally();
 
-document.getElementById("genBtn").addEventListener("click", generate);
-document.getElementById("manualBtn").addEventListener("click", renderManualTemplate);
+  const genBtn =  
+document.getElementById("genBtn");
+  const manualBtn = 
+document.getElementById("manualBtn");
+
+  if (genBtn) genBtn.onclick = generate;
+  if (manualBtn) manualBtn.onclick = 
+renderManualTemplate;
+});
 </script>
 
 <script>
