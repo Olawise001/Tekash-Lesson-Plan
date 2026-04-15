@@ -1335,7 +1335,7 @@ function renderLessonPlan(payload) {
     <tr>
       <td contenteditable="true">${escapeHtml(step.step || "")}</td>
       <td contenteditable="true">${nl2br(step.teacherActivities || "")}</td>
-      <td contenteditable="true">${nl2br(step.pupilsActivities: || "")}</td>
+      <td contenteditable="true">${nl2br(step.pupilsActivities || "")}</td>
       <td contenteditable="true">${nl2br(step.learningPoint || "")}</td>
       ${includeLearningStrategy ? `<td contenteditable="true">${nl2br(step.learningStrategy || "")}</td>` : ""}
     </tr>
