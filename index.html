@@ -472,20 +472,24 @@
   touch-action: pan-x;
 }
 
-/* Force table to keep its full width */
 .presentation-table {
-  min-width: 950px;
+  min-width: 1100px;
   width: max-content;
   border-collapse: collapse;
+  table-layout: fixed;
 }
+
 .presentation-table th,
 .presentation-table td {
   white-space: normal;
   word-break: break-word;
   vertical-align: top;
+  padding: 10px;
+  border: 1px solid var(--border-strong);
 }
+
 .presentation-table td[contenteditable="true"] {
-  min-width: 180px;
+  min-width: 220px;
   min-height: 60px;
 }
 </style>
@@ -820,23 +824,21 @@ function getPresentationTableHtml(stepRowsHtml = "", includeLearningStrategy = t
   return `
     <h3>Presentation/Outline</h3>
     <div class="table-wrap">
-  <table class="presentation-table" id="presentationTable">
-    ...
-  </table>
-</div>
-      <thead>
-        <tr>
-          <th>Step</th>
-          <th>Teacher's Activities</th>
-          <th>Pupils Activities</th>
-          <th>Learning point</th>
-          ${includeLearningStrategy ? "<th>Learning strategy</th>" : ""}
-        </tr>
-      </thead>
-      <tbody>
-        ${stepRowsHtml || getDefaultPresentationRows(includeLearningStrategy)}
-      </tbody>
-    </table>
+      <table class="presentation-table" id="presentationTable">
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Teacher's Activities</th>
+            <th>Student/Pupils Activities</th>
+            <th>Learning point</th>
+            ${includeLearningStrategy ? "<th>Learning strategy</th>" : ""}
+          </tr>
+        </thead>
+        <tbody>
+          ${stepRowsHtml || getDefaultPresentationRows(includeLearningStrategy)}
+        </tbody>
+      </table>
+    </div>
 
     <div style="margin-top:10px;">
       <button type="button" class="act-btn" id="addRowBtn">Add Row</button>
@@ -1020,21 +1022,21 @@ Use exactly this JSON shape:
     {
       "step": "Step 1",
       "teacherActivities": "",
-      "pupilsActivities": "",
+      "Student/Pupils Activities:": "",
       "learningPoint": "",
       "learningStrategy": ""
     },
     {
       "step": "Step 2",
       "teacherActivities": "",
-      "pupilsActivities": "",
+      "Student/Pupils Activities:": "",
       "learningPoint": "",
       "learningStrategy": ""
     },
     {
       "step": "Step 3",
       "teacherActivities": "",
-      "pupilsActivities": "",
+      "Student/Pupils Activities:": "",
       "learningPoint": "",
       "learningStrategy": ""
     }
@@ -1138,7 +1140,8 @@ Need learning strategy column: ${includeLearningStrategy ? "yes" : "no"}
   function saveDraftLocally() {
   const editor = document.querySelector(".lesson-editor");
   if (!editor) return;
-  localStorage.setItem("lesson-plan-draft", editor.innerHTML);
+
+  localStorage.setItem("lesson-plan-draft", editor.outerHTML);
 }
 
 function restoreDraftLocally() {
@@ -1146,15 +1149,12 @@ function restoreDraftLocally() {
   const outBody = document.getElementById("outBody");
   const outputCard = document.getElementById("outputCard");
 
-  if (saved && outBody) {
+  if (saved && outBody && outputCard) {
     outBody.className = "out-body";
     outBody.innerHTML = saved;
     outputCard.classList.add("show");
     bindRenderedActions();
   }
-}
-bindRenderedActions();
-saveDraftLocally();
 }
 
 document.addEventListener("input", (event) => {
@@ -1162,6 +1162,8 @@ document.addEventListener("input", (event) => {
     saveDraftLocally();
   }
 });
+
+window.addEventListener("load", restoreDraftLocally);
 
 /* ---------------- OFFLINE MANUAL TEMPLATE ---------------- */
 
@@ -1333,7 +1335,7 @@ function renderLessonPlan(payload) {
     <tr>
       <td contenteditable="true">${escapeHtml(step.step || "")}</td>
       <td contenteditable="true">${nl2br(step.teacherActivities || "")}</td>
-      <td contenteditable="true">${nl2br(step.pupilsActivities || "")}</td>
+      <td contenteditable="true">${nl2br(step.Student/Pupils Activities: || "")}</td>
       <td contenteditable="true">${nl2br(step.learningPoint || "")}</td>
       ${includeLearningStrategy ? `<td contenteditable="true">${nl2br(step.learningStrategy || "")}</td>` : ""}
     </tr>
@@ -1477,6 +1479,7 @@ function printPlan() {
 
 function saveAsPDF() {
   const editor = document.querySelector(".lesson-editor");
+
   if (!editor || !editor.innerText.trim()) {
     alert("Generate or edit a lesson plan first.");
     return;
@@ -1486,8 +1489,16 @@ function saveAsPDF() {
     margin: 0.4,
     filename: "lesson-plan.pdf",
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-    jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      scrollY: 0
+    },
+    jsPDF: {
+      unit: "in",
+      format: "a4",
+      orientation: "portrait"
+    },
     pagebreak: { mode: ["css", "legacy"] }
   };
 
