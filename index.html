@@ -947,7 +947,7 @@ async function generate() {
   const err = document.getElementById("errMsg");
   err.textContent = "You are offline. AI generation is unavailable. Please use Fill Offline Manually.";
   err.style.display = "block";
-  return;}
+  return;
 }
   const values = collectFormValues();
   const {
@@ -972,7 +972,7 @@ async function generate() {
   if (!validateRequiredFields(values, "Please fill in Week, Teacher's Name, Subject, Class, and Topic before generating.")) {
     return;
   }
-
+}
   const err = document.getElementById("errMsg");
   const btn = document.getElementById("genBtn");
   const card = document.getElementById("outputCard");
