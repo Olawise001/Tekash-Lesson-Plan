@@ -13,6 +13,7 @@
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
     --green-dark: #1a3c2e;
     --green-mid: #2d6a4f;
@@ -337,7 +338,6 @@
   .presentation-table.col-4 col.teacher-col { width: 360px; }
   .presentation-table.col-4 col.student-col { width: 360px; }
   .presentation-table.col-4 col.point-col { width: 320px; }
-
   .presentation-table.col-5 col.teacher-col { width: 300px; }
   .presentation-table.col-5 col.student-col { width: 300px; }
   .presentation-table.col-5 col.point-col { width: 250px; }
@@ -700,6 +700,7 @@
       <button class="act-btn" id="copyBtn" type="button" onclick="copyPlan()">Copy text</button>
       <button class="act-btn" type="button" onclick="printPlan()">Print</button>
       <button class="act-btn" type="button" onclick="saveAsPDF()">Save as PDF</button>
+      <button class="act-btn" type="button" onclick="saveAsWord()">Save as Word</button>
       <button class="act-btn" type="button" onclick="submitToEmail()">Submit to Email</button>
       <button class="act-btn" type="button" onclick="generateNew()">New plan</button>
     </div>
@@ -718,9 +719,7 @@ function needsRationale(grade) { return isGradeSchool(grade) || isNursery(grade)
 function needsGradeReferenceAfterInstructionalMaterials(grade) { return isGradeSchool(grade); }
 function needsSecondaryReferencesAfterConclusion(grade) { return isSecondarySchool(grade); }
 function showLearningStrategyColumn(grade) { return isSecondarySchool(grade); }
-function escapeHtml(str) {
-  return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
+function escapeHtml(str) { return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 function nl2br(str) { return escapeHtml(str).replace(/\n/g, "<br>"); }
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 function extractJson(text) {
@@ -1071,7 +1070,7 @@ Need learning strategy column: ${includeLearningStrategy ? "yes" : "no"}
     if (/overloaded/i.test(e.message) || /rate limit/i.test(e.message)) {
       body.textContent = "The AI service is busy right now. Please wait a moment and try again.";
     } else {
-      body.textContent = "Error: " + e.message + "\n\nPlease check your API key, internet connection, and try again.";
+      body.textContent = "Error: " + e.message + "\\n\\nPlease check your API key, internet connection, and try again.";
     }
   } finally {
     btn.disabled = false;
@@ -1373,23 +1372,19 @@ function saveAsPDF() {
     table.style.tableLayout = "fixed";
 
     const isFive = table.querySelector("thead tr").children.length === 5;
-    if (isFive) {
-      const cols = table.querySelectorAll("col");
-      if (cols.length === 5) {
-        cols[0].style.width = "8%";
-        cols[1].style.width = "27%";
-        cols[2].style.width = "27%";
-        cols[3].style.width = "25%";
-        cols[4].style.width = "13%";
-      }
-    } else {
-      const cols = table.querySelectorAll("col");
-      if (cols.length === 4) {
-        cols[0].style.width = "8%";
-        cols[1].style.width = "31%";
-        cols[2].style.width = "31%";
-        cols[3].style.width = "30%";
-      }
+    const cols = table.querySelectorAll("col");
+
+    if (isFive && cols.length === 5) {
+      cols[0].style.width = "8%";
+      cols[1].style.width = "27%";
+      cols[2].style.width = "27%";
+      cols[3].style.width = "25%";
+      cols[4].style.width = "13%";
+    } else if (!isFive && cols.length === 4) {
+      cols[0].style.width = "8%";
+      cols[1].style.width = "31%";
+      cols[2].style.width = "31%";
+      cols[3].style.width = "30%";
     }
   });
 
@@ -1417,16 +1412,8 @@ function saveAsPDF() {
     margin: 0.25,
     filename: "lesson-plan.pdf",
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      scrollY: 0
-    },
-    jsPDF: {
-      unit: "in",
-      format: "a4",
-      orientation: "landscape"
-    },
+    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+    jsPDF: { unit: "in", format: "a4", orientation: "landscape" },
     pagebreak: { mode: ["css", "legacy"] }
   };
 
@@ -1436,6 +1423,114 @@ function saveAsPDF() {
     document.body.removeChild(temp);
     alert("PDF export failed. Please try again.");
   });
+}
+
+function saveAsWord() {
+  const editor = document.querySelector(".lesson-editor");
+  if (!editor || !editor.innerText.trim()) {
+    alert("Generate or edit a lesson plan first.");
+    return;
+  }
+
+  const clone = editor.cloneNode(true);
+  clone.querySelectorAll("button").forEach(function (btn) { btn.remove(); });
+  clone.querySelectorAll("[contenteditable='true']").forEach(function (el) {
+    el.removeAttribute("contenteditable");
+    el.style.outline = "none";
+    el.style.background = "transparent";
+  });
+  clone.querySelectorAll(".table-wrap").forEach(function (wrap) {
+    wrap.style.overflow = "visible";
+    wrap.style.width = "100%";
+  });
+  clone.querySelectorAll("table").forEach(function (table) {
+    table.setAttribute("border", "1");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
+    table.style.tableLayout = "fixed";
+    table.style.marginBottom = "16px";
+  });
+  clone.querySelectorAll("th").forEach(function (th) {
+    th.style.border = "1px solid #000";
+    th.style.padding = "8px";
+    th.style.verticalAlign = "top";
+    th.style.textAlign = "left";
+    th.style.background = "#eeeeee";
+    th.style.fontWeight = "bold";
+  });
+  clone.querySelectorAll("td").forEach(function (td) {
+    td.style.border = "1px solid #000";
+    td.style.padding = "8px";
+    td.style.verticalAlign = "top";
+    td.style.textAlign = "left";
+    td.style.wordBreak = "break-word";
+  });
+
+  const content = `
+  <html xmlns:o="urn:schemas-microsoft-com:office:office"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        xmlns="http://www.w3.org/TR/REC-html40">
+  <head>
+    <meta charset="utf-8">
+    <title>Lesson Plan</title>
+    <style>
+      @page {
+        size: A4 portrait;
+        margin: 0.6in;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+      }
+      h1, h2, h3 {
+        margin-top: 14px;
+        margin-bottom: 6px;
+      }
+      h3 {
+        font-size: 13pt;
+      }
+      .section-block {
+        margin-bottom: 12px;
+      }
+      .editable-line {
+        margin-bottom: 4px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        margin-top: 8px;
+        margin-bottom: 14px;
+      }
+      th, td {
+        border: 1px solid #000;
+        padding: 8px;
+        vertical-align: top;
+        text-align: left;
+        word-wrap: break-word;
+      }
+      th {
+        background: #eeeeee;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    ${clone.innerHTML}
+  </body>
+  </html>`;
+
+  const blob = new Blob(["\\ufeff", content], { type: "application/msword" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "lesson-plan.doc";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 function submitToEmail() {
@@ -1464,14 +1559,8 @@ window.addEventListener("load", restoreDraftLocally);
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", async function () {
     try {
-      const reg = await navigator.serviceWorker.register("/sw.js");
+      await navigator.serviceWorker.register("/sw.js");
       console.log("Service worker registered");
-
-      reg.update();
-
-      navigator.serviceWorker.addEventListener("controllerchange", function () {
-        window.location.reload();
-      });
     } catch (error) {
       console.error("Service worker registration failed:", error);
     }
