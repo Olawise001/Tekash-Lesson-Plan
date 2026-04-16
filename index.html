@@ -6,19 +6,13 @@
 <title>Lesson Plan Generator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
-
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#1a3c2e">
 <link rel="icon" href="/icons/icon-192.png">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
 
 <style>
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --green-dark: #1a3c2e;
     --green-mid: #2d6a4f;
@@ -35,11 +29,7 @@
     --radius: 10px;
     --radius-lg: 16px;
   }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
+  html { scroll-behavior: smooth; }
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--cream);
@@ -47,7 +37,6 @@
     min-height: 100vh;
     line-height: 1.6;
   }
-
   .topbar {
     background: var(--green-dark);
     padding: 14px 24px;
@@ -55,52 +44,35 @@
     align-items: center;
     gap: 12px;
   }
-
   .topbar-logo {
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     background: var(--green-soft);
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-
   .topbar-logo svg {
-    width: 16px;
-    height: 16px;
-    stroke: #fff;
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    width: 16px; height: 16px;
+    stroke: #fff; fill: none; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
   }
-
   .topbar-name {
     font-family: 'Lora', serif;
     font-size: 17px;
     color: #fff;
     font-weight: 600;
   }
-
   .topbar-sub {
     font-size: 12px;
     color: rgba(255,255,255,0.55);
     margin-left: auto;
   }
-
   .page {
     max-width: 1000px;
     margin: 0 auto;
     padding: 40px 20px 80px;
   }
-
-  .hero {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
+  .hero { text-align: center; margin-bottom: 40px; }
   .hero h1 {
     font-family: 'Lora', serif;
     font-size: clamp(26px, 5vw, 38px);
@@ -108,14 +80,12 @@
     line-height: 1.25;
     margin-bottom: 10px;
   }
-
   .hero p {
     font-size: 15px;
     color: var(--text-mid);
     max-width: 560px;
     margin: 0 auto;
   }
-
   .card {
     background: #fff;
     border-radius: var(--radius-lg);
@@ -124,7 +94,6 @@
     overflow: hidden;
     margin-bottom: 24px;
   }
-
   .card-head {
     padding: 16px 24px;
     border-bottom: 1px solid var(--border);
@@ -133,63 +102,32 @@
     align-items: center;
     gap: 10px;
   }
-
   .card-head-icon {
-    width: 28px;
-    height: 28px;
+    width: 28px; height: 28px;
     background: var(--green-pale);
     border-radius: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-
   .card-head-icon svg {
-    width: 14px;
-    height: 14px;
-    stroke: var(--green-mid);
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    width: 14px; height: 14px;
+    stroke: var(--green-mid); fill: none; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
   }
-
   .card-head h2 {
     font-family: 'Lora', serif;
     font-size: 15px;
     font-weight: 600;
     color: var(--text-dark);
   }
-
-  .card-body {
-    padding: 24px;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .form-group.full {
-    grid-column: 1 / -1;
-  }
-
+  .card-body { padding: 24px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
   label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-soft);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: 11px; font-weight: 500; color: var(--text-soft);
+    letter-spacing: 0.06em; text-transform: uppercase;
   }
-
   input, select, textarea {
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
@@ -204,13 +142,11 @@
     appearance: none;
     -webkit-appearance: none;
   }
-
   input:focus, select:focus, textarea:focus {
     border-color: var(--green-soft);
     box-shadow: 0 0 0 3px rgba(82,183,136,0.15);
     background: #fff;
   }
-
   select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8a82' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -218,17 +154,9 @@
     padding-right: 36px;
     cursor: pointer;
   }
-
-  textarea {
-    resize: vertical;
-    min-height: 90px;
-    line-height: 1.55;
-  }
-
-  .gen-wrap {
-    padding: 0 24px 24px;
-  }
-
+  textarea { resize: vertical; min-height: 90px; line-height: 1.55; }
+  .gen-wrap { padding: 0 24px 24px; }
+  .gen-row { display:flex; gap:12px; flex-wrap:wrap; }
   .gen-btn {
     width: 100%;
     padding: 14px;
@@ -246,35 +174,12 @@
     justify-content: center;
     gap: 8px;
   }
-
-  .gen-btn:hover:not(:disabled) {
-    background: var(--green-mid);
-  }
-
-  .gen-btn:active:not(:disabled) {
-    transform: scale(0.99);
-  }
-
-  .gen-btn:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-  }
-
-  .err-msg {
-    color: #c0392b;
-    font-size: 13px;
-    padding: 10px 24px 0;
-    display: none;
-  }
-
-  .output-card {
-    display: none;
-  }
-
-  .output-card.show {
-    display: block;
-  }
-
+  .gen-btn:hover:not(:disabled) { background: var(--green-mid); }
+  .gen-btn:active:not(:disabled) { transform: scale(0.99); }
+  .gen-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .err-msg { color: #c0392b; font-size: 13px; padding: 10px 24px 0; display: none; }
+  .output-card { display: none; }
+  .output-card.show { display: block; }
   .out-meta-bar {
     padding: 14px 24px;
     background: var(--green-dark);
@@ -284,95 +189,61 @@
     flex-wrap: wrap;
     gap: 10px;
   }
-
   .plan-title {
     font-family: 'Lora', serif;
     font-size: 15px;
     color: #fff;
     font-weight: 600;
   }
-
-  .plan-info {
-    font-size: 12px;
-    color: rgba(255,255,255,0.65);
-  }
-
-  .editable-note {
-    padding: 12px 24px 0;
-    font-size: 12px;
-    color: var(--text-soft);
-  }
-
-  .out-body {
-    padding: 28px 24px;
-    min-height: 220px;
-  }
-
-  .out-body.loading {
-    color: var(--text-soft);
-    font-style: italic;
-    font-size: 14px;
-  }
-
-  .lesson-editor {
-    outline: none;
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--text-dark);
-  }
-
-  .lesson-editor h3 {
-    margin: 18px 0 8px;
-    font-size: 16px;
-    color: var(--green-dark);
-    font-family: 'Lora', serif;
-  }
-
-  .lesson-editor p {
-    margin-bottom: 8px;
-  }
-
-  .lesson-editor .section-block {
-    margin-bottom: 14px;
-  }
-
-  .lesson-editor .presentation-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 14px 0 18px;
-    table-layout: fixed;
-  }
-
-  .lesson-editor .presentation-table th,
-  .lesson-editor .presentation-table td {
-    border: 1px solid var(--border-strong);
-    padding: 10px;
-    vertical-align: top;
-    text-align: left;
-    word-wrap: break-word;
-  }
-
-  .lesson-editor .presentation-table th {
-    background: var(--cream-dark);
-    font-weight: 600;
-  }
-
-  .lesson-editor .presentation-table td[contenteditable="true"] {
-    background: #fffdf8;
-  }
-
-  .lesson-editor .presentation-table td[contenteditable="true"]:focus,
-  .lesson-editor .editable-line:focus {
-    outline: 2px solid rgba(82,183,136,0.25);
-    outline-offset: -2px;
-  }
-
+  .plan-info { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .editable-note { padding: 12px 24px 0; font-size: 12px; color: var(--text-soft); }
+  .out-body { padding: 28px 24px; min-height: 220px; }
+  .out-body.loading { color: var(--text-soft); font-style: italic; font-size: 14px; }
+  .lesson-editor { outline: none; font-size: 14px; line-height: 1.8; color: var(--text-dark); }
+  .lesson-editor h3 { margin: 18px 0 8px; font-size: 16px; color: var(--green-dark); font-family: 'Lora', serif; }
+  .lesson-editor .section-block { margin-bottom: 14px; }
   .lesson-editor .editable-line {
     display: block;
     padding: 2px 4px;
     border-radius: 4px;
   }
-
+  .lesson-editor .editable-line:focus,
+  .lesson-editor .presentation-table td[contenteditable="true"]:focus {
+    outline: 2px solid rgba(82,183,136,0.25);
+    outline-offset: -2px;
+  }
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+  .presentation-table {
+    min-width: 1100px;
+    width: max-content;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 14px 0 18px;
+  }
+  .presentation-table th,
+  .presentation-table td {
+    border: 1px solid var(--border-strong);
+    padding: 10px;
+    vertical-align: top;
+    text-align: left;
+    word-break: break-word;
+    white-space: normal;
+  }
+  .presentation-table th {
+    background: var(--cream-dark);
+    font-weight: 600;
+  }
+  .presentation-table td[contenteditable="true"] {
+    background: #fffdf8;
+    min-width: 220px;
+    min-height: 60px;
+  }
   .out-actions {
     padding: 14px 24px;
     border-top: 1px solid var(--border);
@@ -381,7 +252,6 @@
     flex-wrap: wrap;
     gap: 8px;
   }
-
   .act-btn {
     font-family: 'DM Sans', sans-serif;
     font-size: 13px;
@@ -396,102 +266,31 @@
     align-items: center;
     gap: 6px;
   }
-
   .act-btn:hover {
     background: var(--green-pale);
     color: var(--green-dark);
     border-color: var(--green-soft);
   }
-
-  .act-btn.copied {
-    background: var(--green-pale);
-    color: var(--green-dark);
-  }
-
-  .dots::after {
-    content: '';
-    animation: dots 1.4s infinite;
-  }
-
-  @keyframes dots {
-    0% { content: ''; }
-    25% { content: '.'; }
-    50% { content: '..'; }
-    75% { content: '...'; }
-  }
-
+  .act-btn.copied { background: var(--green-pale); color: var(--green-dark); }
+  .dots::after { content: ''; animation: dots 1.4s infinite; }
+  @keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
   @media print {
-    body {
-      background: #fff;
-    }
-
-    .topbar,
-    .hero,
-    .input-card,
-    .out-actions,
-    .editable-note {
-      display: none !important;
-    }
-
-    .page {
-      max-width: 100%;
-      padding: 0;
-      margin: 0;
-    }
-
-    .output-card {
-      display: block !important;
-      box-shadow: none;
-      border: none;
-      border-radius: 0;
-    }
-
-    .out-meta-bar {
-      background: #1a3c2e !important;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-
-    .out-body {
-      padding: 20px;
-    }
-
-    .lesson-editor .presentation-table td[contenteditable="true"],
-    .lesson-editor .editable-line {
+    body { background: #fff; }
+    .topbar, .hero, .input-card, .out-actions, .editable-note { display: none !important; }
+    .page { max-width: 100%; padding: 0; margin: 0; }
+    .output-card { display: block !important; box-shadow: none; border: none; border-radius: 0; }
+    .out-meta-bar { background: #1a3c2e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .out-body { padding: 20px; }
+    .lesson-editor .presentation-table td[contenteditable="true"], .lesson-editor .editable-line {
       outline: none !important;
       background: transparent !important;
     }
   }
-
-  /* Horizontal scroll for tables on small screens */
-.table-wrap {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: visible;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
-}
-
-.presentation-table {
-  min-width: 1100px;
-  width: max-content;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-
-.presentation-table th,
-.presentation-table td {
-  white-space: normal;
-  word-break: break-word;
-  vertical-align: top;
-  padding: 10px;
-  border: 1px solid var(--border-strong);
-}
-
-.presentation-table td[contenteditable="true"] {
-  min-width: 220px;
-  min-height: 60px;
-}
+  @media (max-width: 700px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .page { padding: 24px 12px 60px; }
+    .card-body, .out-body, .out-actions, .card-head, .out-meta-bar, .editable-note, .gen-wrap { padding-left: 16px; padding-right: 16px; }
+  }
 </style>
 </head>
 <body>
@@ -529,13 +328,35 @@
     <div class="card-body">
       <div class="form-grid">
         <div class="form-group">
+          <label>School Name *</label>
+          <input type="text" id="school_name" placeholder="e.g. Tekash International School">
+        </div>
+
+        <div class="form-group">
+          <label>Session *</label>
+          <input type="text" id="session" placeholder="e.g. 2025/2026">
+        </div>
+
+        <div class="form-group">
+          <label>Term *</label>
+          <select id="term">
+            <option value="">Select term</option>
+            <option>First Term</option>
+            <option>Second Term</option>
+            <option>Third Term</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>Week *</label>
           <input type="text" id="week" placeholder="e.g. Week 5">
         </div>
-    <div class="form-group">
+
+        <div class="form-group">
           <label>Day</label>
-        <input type="text" id="day" placeholder="e.g. 1">
+          <input type="text" id="day" placeholder="e.g. Monday">
         </div>
+
         <div class="form-group">
           <label>Date</label>
           <input type="date" id="date">
@@ -647,20 +468,16 @@
       </div>
     </div>
 
-    <p class="err-msg" id="errMsg">Please fill in Week, Teacher's Name, Subject, Class, and Topic before generating.</p>
+    <p class="err-msg" id="errMsg">Please fill in School Name, Session, Term, Week, Teacher's Name, Subject, Class, and Topic before generating.</p>
 
     <div class="gen-wrap">
-     <div class="gen-wrap" style="display:flex; gap:12px; flex-wrap:wrap;">
-  <button class="gen-btn" id="genBtn" type="button" style="flex:1;">
-    Generate with AI
-  </button>
-
-  <button class="gen-btn" id="manualBtn" type="button" style="flex:1; background:#2d6a4f;">
-    Fill Offline Manually
-  </button>
-</div>
+      <div class="gen-row">
+        <button class="gen-btn" id="genBtn" type="button" style="flex:1;">Generate with AI</button>
+        <button class="gen-btn" id="manualBtn" type="button" style="flex:1; background:#2d6a4f;">Fill Offline Manually</button>
+      </div>
     </div>
   </div>
+
   <div class="card output-card" id="outputCard">
     <div class="out-meta-bar">
       <div>
@@ -670,7 +487,6 @@
     </div>
 
     <div class="editable-note">You can edit every section below, including each cell in the presentation table.</div>
-
     <div class="out-body" id="outBody"></div>
 
     <div class="out-actions">
@@ -683,8 +499,9 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-const API_KEY = "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"
+const API_KEY = "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";
 
 /* ---------------- HELPERS ---------------- */
 
@@ -692,89 +509,67 @@ function isGradeSchool(grade) {
   grade = String(grade || "").trim();
   return grade.startsWith("Grade");
 }
-
 function isNursery(grade) {
   grade = String(grade || "").trim();
   return grade.startsWith("Nursery");
 }
-
 function isReception(grade) {
   grade = String(grade || "").trim();
   return grade.startsWith("Reception");
 }
-
 function isSecondarySchool(grade) {
   grade = String(grade || "").trim();
   return grade.startsWith("JSS") || grade.startsWith("SS");
 }
-
 function needsRationale(grade) {
   return isGradeSchool(grade) || isNursery(grade) || isReception(grade);
 }
-
 function needsGradeReferenceAfterInstructionalMaterials(grade) {
   return isGradeSchool(grade);
 }
-
 function needsSecondaryReferencesAfterConclusion(grade) {
   return isSecondarySchool(grade);
 }
-
 function showLearningStrategyColumn(grade) {
   return isSecondarySchool(grade);
 }
-
 function escapeHtml(str) {
   return String(str || "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 }
-
 function nl2br(str) {
   return escapeHtml(str).replace(/\n/g, "<br>");
 }
-
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 function extractJson(text) {
   let cleaned = String(text || "").trim();
-
   if (cleaned.startsWith("```json")) {
     cleaned = cleaned.replace(/^```json\s*/i, "").replace(/\s*```$/, "");
   } else if (cleaned.startsWith("```")) {
     cleaned = cleaned.replace(/^```\s*/i, "").replace(/\s*```$/, "");
   }
-
   const firstBrace = cleaned.indexOf("{");
   const lastBrace = cleaned.lastIndexOf("}");
   if (firstBrace !== -1 && lastBrace !== -1) {
     cleaned = cleaned.slice(firstBrace, lastBrace + 1);
   }
-
   return JSON.parse(cleaned);
 }
-
 async function fetchWithRetry(url, options, retries = 3, delay = 2000) {
   let lastMessage = "Request failed.";
-
   for (let attempt = 1; attempt <= retries; attempt++) {
     const resp = await fetch(url, options);
-
-    if (resp.ok) {
-      return resp;
-    }
+    if (resp.ok) return resp;
 
     let errData = {};
-    try {
-      errData = await resp.json();
-    } catch (_) {}
+    try { errData = await resp.json(); } catch (_) {}
 
     const message = errData?.error?.message || `HTTP ${resp.status}`;
     lastMessage = message;
-
     const retryable =
       resp.status === 429 ||
       resp.status === 503 ||
@@ -787,13 +582,10 @@ async function fetchWithRetry(url, options, retries = 3, delay = 2000) {
       await sleep(delay * attempt);
       continue;
     }
-
     throw new Error(message);
   }
-
   throw new Error(lastMessage);
 }
-
 function getDefaultPresentationRows(includeLearningStrategy = true) {
   return `
     <tr>
@@ -819,7 +611,6 @@ function getDefaultPresentationRows(includeLearningStrategy = true) {
     </tr>
   `;
 }
-
 function getPresentationTableHtml(stepRowsHtml = "", includeLearningStrategy = true) {
   return `
     <h3>Presentation/Outline</h3>
@@ -839,24 +630,20 @@ function getPresentationTableHtml(stepRowsHtml = "", includeLearningStrategy = t
         </tbody>
       </table>
     </div>
-
     <div style="margin-top:10px;">
       <button type="button" class="act-btn" id="addRowBtn">Add Row</button>
     </div>
   `;
 }
-
 function addPresentationRow() {
   const table = document.getElementById("presentationTable");
   if (!table) {
     alert("Presentation table not found.");
     return;
   }
-
   const tbody = table.querySelector("tbody");
   const rowCount = tbody.rows.length + 1;
   const hasLearningStrategy = table.querySelector("thead tr").children.length === 5;
-
   const row = document.createElement("tr");
   row.innerHTML = `
     <td contenteditable="true">Step ${rowCount}</td>
@@ -865,20 +652,18 @@ function addPresentationRow() {
     <td contenteditable="true"></td>
     ${hasLearningStrategy ? '<td contenteditable="true"></td>' : ''}
   `;
-
   tbody.appendChild(row);
 }
-
 function bindRenderedActions() {
   const addRowBtn = document.getElementById("addRowBtn");
-  if (addRowBtn) {
-    addRowBtn.addEventListener("click", addPresentationRow);
-  }
+  if (addRowBtn) addRowBtn.onclick = addPresentationRow;
 }
-
 function collectFormValues() {
+  const schoolName = document.getElementById("school_name").value.trim();
+  const session = document.getElementById("session").value.trim();
+  const term = document.getElementById("term").value.trim();
   const week = document.getElementById("week").value.trim();
-  const day = document.getElementById("day") ? document.getElementById("day").value.trim() : "";
+  const day = document.getElementById("day").value.trim();
   const dateVal = document.getElementById("date").value;
   const subject = document.getElementById("subject").value.trim();
   const theme = document.getElementById("theme").value.trim();
@@ -895,48 +680,22 @@ function collectFormValues() {
   const notes = document.getElementById("notes").value.trim();
 
   const formattedDate = dateVal
-    ? new Date(dateVal + "T00:00:00").toLocaleDateString("en-GB", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      })
-    : new Date().toLocaleDateString("en-GB", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      });
+    ? new Date(dateVal + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
+    : new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 
   return {
-    week,
-    day,
-    dateVal,
-    formattedDate,
-    subject,
-    theme,
-    topic,
-    subtopic,
-    grade,
-    numberInClass,
-    averageAge,
-    duration,
-    timePeriod,
-    gender,
-    teacher,
-    materials,
-    notes
+    schoolName, session, term, week, day, dateVal, formattedDate, subject, theme, topic, subtopic,
+    grade, numberInClass, averageAge, duration, timePeriod, gender, teacher, materials, notes
   };
 }
-
 function validateRequiredFields(values, message) {
   const err = document.getElementById("errMsg");
   err.style.display = "none";
-
-  if (!values.week || !values.teacher || !values.grade || !values.subject || !values.topic) {
+  if (!values.schoolName || !values.session || !values.term || !values.week || !values.teacher || !values.grade || !values.subject || !values.topic) {
     err.textContent = message;
     err.style.display = "block";
     return false;
   }
-
   return true;
 }
 
@@ -944,35 +703,22 @@ function validateRequiredFields(values, message) {
 
 async function generate() {
   if (!navigator.onLine) {
-  const err = document.getElementById("errMsg");
-  err.textContent = "You are offline. AI generation is unavailable. Please use Fill Offline Manually.";
-  err.style.display = "block";
-  return;
-}
-  const values = collectFormValues();
-  const {
-    week,
-    day,
-    formattedDate,
-    subject,
-    theme,
-    topic,
-    subtopic,
-    grade,
-    numberInClass,
-    averageAge,
-    duration,
-    timePeriod,
-    gender,
-    teacher,
-    materials,
-    notes
-  } = values;
-
-  if (!validateRequiredFields(values, "Please fill in Week, Teacher's Name, Subject, Class, and Topic before generating.")) {
+    const err = document.getElementById("errMsg");
+    err.textContent = "You are offline. AI generation is unavailable. Please use Fill Offline Manually.";
+    err.style.display = "block";
     return;
   }
-  
+
+  const values = collectFormValues();
+  const {
+    schoolName, session, term, week, day, formattedDate, subject, theme, topic, subtopic,
+    grade, numberInClass, averageAge, duration, timePeriod, gender, teacher, materials, notes
+  } = values;
+
+  if (!validateRequiredFields(values, "Please fill in School Name, Session, Term, Week, Teacher's Name, Subject, Class, and Topic before generating.")) {
+    return;
+  }
+
   const err = document.getElementById("errMsg");
   const btn = document.getElementById("genBtn");
   const card = document.getElementById("outputCard");
@@ -980,7 +726,8 @@ async function generate() {
   const title = document.getElementById("planTitle");
   const info = document.getElementById("planInfo");
 
-  
+  err.style.display = "none";
+
   if (!API_KEY || API_KEY.includes("PASTE_YOUR_REAL_API_KEY_HERE")) {
     err.textContent = "Please paste your real API key inside the script.";
     err.style.display = "block";
@@ -999,10 +746,8 @@ async function generate() {
   body.className = "out-body loading";
   body.textContent = "Generating lesson plan...";
   title.textContent = `${subject} - ${topic}`;
-  info.textContent = `${grade} | ${duration} | ${teacher}`;
+  info.textContent = `${schoolName} | ${grade} | ${term} | ${duration}`;
 
-
-  
   const prompt = `
 You are an expert Nigerian lesson plan writer.
 
@@ -1022,21 +767,21 @@ Use exactly this JSON shape:
     {
       "step": "Step 1",
       "teacherActivities": "",
-      "Student/Pupils Activities:": "",
+      "pupilsActivities": "",
       "learningPoint": "",
       "learningStrategy": ""
     },
     {
       "step": "Step 2",
       "teacherActivities": "",
-      "Student/Pupils Activities:": "",
+      "pupilsActivities": "",
       "learningPoint": "",
       "learningStrategy": ""
     },
     {
       "step": "Step 3",
       "teacherActivities": "",
-      "Student/Pupils Activities:": "",
+      "pupilsActivities": "",
       "learningPoint": "",
       "learningStrategy": ""
     }
@@ -1049,17 +794,20 @@ Use exactly this JSON shape:
 }
 
 Rules:
-- Make all content subject-specific and class-appropriate
-- Minimum of 3 presentation steps
-- If rationale is not needed, return an empty string
-- If grade-school reference material is not needed, return an empty string
-- If secondary references are not needed, return an empty string
-- For Grade, Nursery, and Reception, learningStrategy may be empty
-- For Secondary school, learningStrategy must be filled
-- Use proper Nigerian school lesson plan language
-- Keep the response valid JSON
+- Make all content subject-specific and class-appropriate.
+- Minimum of 3 presentation steps.
+- If rationale is not needed, return an empty string.
+- If grade-school reference material is not needed, return an empty string.
+- If secondary references are not needed, return an empty string.
+- For Grade, Nursery, and Reception, learningStrategy may be empty.
+- For Secondary school, learningStrategy must be filled.
+- Use proper Nigerian school lesson plan language.
+- Keep the response valid JSON.
 
 Lesson details:
+School Name: ${schoolName}
+Session: ${session}
+Term: ${term}
 Week: ${week}
 Day: ${day || "Not specified"}
 Date: ${formattedDate}
@@ -1096,12 +844,7 @@ Need learning strategy column: ${includeLearningStrategy ? "yes" : "no"}
         body: JSON.stringify({
           model: "claude-sonnet-4-20250514",
           max_tokens: 1800,
-          messages: [
-            {
-              role: "user",
-              content: prompt
-            }
-          ]
+          messages: [{ role: "user", content: prompt }]
         })
       },
       3,
@@ -1109,11 +852,7 @@ Need learning strategy column: ${includeLearningStrategy ? "yes" : "no"}
     );
 
     const result = await resp.json();
-    const rawText = (result.content || [])
-      .map(item => item.text || "")
-      .join("")
-      .trim();
-
+    const rawText = (result.content || []).map(item => item.text || "").join("").trim();
     const data = extractJson(rawText);
 
     renderLessonPlan({
@@ -1127,7 +866,6 @@ Need learning strategy column: ${includeLearningStrategy ? "yes" : "no"}
   } catch (e) {
     console.error("Generation error:", e);
     body.className = "out-body";
-
     if (/overloaded/i.test(e.message) || /rate limit/i.test(e.message)) {
       body.textContent = "The AI service is busy right now. Please wait a moment and try again.";
     } else {
@@ -1137,18 +875,19 @@ Need learning strategy column: ${includeLearningStrategy ? "yes" : "no"}
     btn.disabled = false;
     btn.textContent = "Generate with AI";
   }
-  function saveDraftLocally() {
-  const editor = document.querySelector(".lesson-editor");
-  if (!editor) return;
-
-  localStorage.setItem("lesson-plan-draft", editor.outerHTML);
 }
 
+/* ---------------- DRAFT SAVE / RESTORE ---------------- */
+
+function saveDraftLocally() {
+  const editor = document.querySelector(".lesson-editor");
+  if (!editor) return;
+  localStorage.setItem("lesson-plan-draft", editor.outerHTML);
+}
 function restoreDraftLocally() {
   const saved = localStorage.getItem("lesson-plan-draft");
   const outBody = document.getElementById("outBody");
   const outputCard = document.getElementById("outputCard");
-
   if (saved && outBody && outputCard) {
     outBody.className = "out-body";
     outBody.innerHTML = saved;
@@ -1156,38 +895,22 @@ function restoreDraftLocally() {
     bindRenderedActions();
   }
 }
-
 document.addEventListener("input", (event) => {
   if (event.target.closest(".lesson-editor")) {
     saveDraftLocally();
   }
 });
 
-window.addEventListener("load", restoreDraftLocally);
-
 /* ---------------- OFFLINE MANUAL TEMPLATE ---------------- */
 
 function renderManualTemplate() {
   const values = collectFormValues();
   const {
-    week,
-    day,
-    formattedDate,
-    subject,
-    theme,
-    topic,
-    subtopic,
-    grade,
-    numberInClass,
-    averageAge,
-    duration,
-    timePeriod,
-    gender,
-    teacher,
-    materials
+    schoolName, session, term, week, day, formattedDate, subject, theme, topic, subtopic,
+    grade, numberInClass, averageAge, duration, timePeriod, gender, teacher, materials
   } = values;
 
-  if (!validateRequiredFields(values, "Please fill in Week, Teacher's Name, Subject, Class, and Topic before opening the manual template.")) {
+  if (!validateRequiredFields(values, "Please fill in School Name, Session, Term, Week, Teacher's Name, Subject, Class, and Topic before opening the manual template.")) {
     return;
   }
 
@@ -1202,7 +925,7 @@ function renderManualTemplate() {
   const includeLearningStrategy = showLearningStrategyColumn(grade);
 
   title.textContent = `${subject} - ${topic}`;
-  info.textContent = `${grade} | ${duration} | ${teacher}`;
+  info.textContent = `${schoolName} | ${grade} | ${term} | ${duration}`;
   card.classList.add("show");
 
   body.className = "out-body";
@@ -1211,6 +934,9 @@ function renderManualTemplate() {
       <h3>Lesson Plan</h3>
 
       <div class="section-block">
+        <div class="editable-line" contenteditable="true"><strong>School Name:</strong> ${escapeHtml(schoolName)}</div>
+        <div class="editable-line" contenteditable="true"><strong>Session:</strong> ${escapeHtml(session)}</div>
+        <div class="editable-line" contenteditable="true"><strong>Term:</strong> ${escapeHtml(term)}</div>
         <div class="editable-line" contenteditable="true"><strong>Week:</strong> ${escapeHtml(week)}</div>
         <div class="editable-line" contenteditable="true"><strong>Day:</strong> ${escapeHtml(day || "Not specified")}</div>
         <div class="editable-line" contenteditable="true"><strong>Date:</strong> ${escapeHtml(formattedDate)}</div>
@@ -1224,6 +950,7 @@ function renderManualTemplate() {
         <div class="editable-line" contenteditable="true"><strong>Duration:</strong> ${escapeHtml(duration)}</div>
         <div class="editable-line" contenteditable="true"><strong>Time/Period:</strong> ${escapeHtml(timePeriod || "Not specified")}</div>
         <div class="editable-line" contenteditable="true"><strong>Gender:</strong> ${escapeHtml(gender)}</div>
+        <div class="editable-line" contenteditable="true"><strong>Teacher's Name:</strong> ${escapeHtml(teacher)}</div>
       </div>
 
       <h3>Learning Objective</h3>
@@ -1237,26 +964,18 @@ function renderManualTemplate() {
 
       ${includeRationale ? `
         <h3>Rationale</h3>
-        <div class="section-block">
-          <div class="editable-line" contenteditable="true"></div>
-        </div>
+        <div class="section-block"><div class="editable-line" contenteditable="true"></div></div>
       ` : ""}
 
       <h3>Previous knowledge</h3>
-      <div class="section-block">
-        <div class="editable-line" contenteditable="true"></div>
-      </div>
+      <div class="section-block"><div class="editable-line" contenteditable="true"></div></div>
 
       <h3>Instructional materials</h3>
-      <div class="section-block">
-        <div class="editable-line" contenteditable="true">${escapeHtml(materials || "")}</div>
-      </div>
+      <div class="section-block"><div class="editable-line" contenteditable="true">${escapeHtml(materials || "")}</div></div>
 
       ${includeGradeReferenceMaterial ? `
         <h3>Reference material</h3>
-        <div class="section-block">
-          <div class="editable-line" contenteditable="true"></div>
-        </div>
+        <div class="section-block"><div class="editable-line" contenteditable="true"></div></div>
       ` : ""}
 
       ${getPresentationTableHtml("", includeLearningStrategy)}
@@ -1271,20 +990,14 @@ function renderManualTemplate() {
       </div>
 
       <h3>Summary</h3>
-      <div class="section-block">
-        <div class="editable-line" contenteditable="true"></div>
-      </div>
+      <div class="section-block"><div class="editable-line" contenteditable="true"></div></div>
 
       <h3>Conclusion</h3>
-      <div class="section-block">
-        <div class="editable-line" contenteditable="true"></div>
-      </div>
+      <div class="section-block"><div class="editable-line" contenteditable="true"></div></div>
 
       ${includeSecondaryReferences ? `
         <h3>References</h3>
-        <div class="section-block">
-          <div class="editable-line" contenteditable="true"></div>
-        </div>
+        <div class="section-block"><div class="editable-line" contenteditable="true"></div></div>
       ` : ""}
 
       <h3>Assignment/Home-fun</h3>
@@ -1295,8 +1008,8 @@ function renderManualTemplate() {
       </div>
     </div>
   `;
-
   bindRenderedActions();
+  saveDraftLocally();
   card.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -1304,28 +1017,13 @@ function renderManualTemplate() {
 
 function renderLessonPlan(payload) {
   const {
-    week,
-    day,
-    formattedDate,
-    subject,
-    theme,
-    topic,
-    subtopic,
-    grade,
-    numberInClass,
-    averageAge,
-    duration,
-    timePeriod,
-    gender,
-    includeRationale,
-    includeGradeReferenceMaterial,
-    includeSecondaryReferences,
-    includeLearningStrategy,
-    data
+    schoolName, session, term, week, day, formattedDate, subject, theme, topic, subtopic,
+    grade, numberInClass, averageAge, duration, timePeriod, gender, teacher,
+    includeRationale, includeGradeReferenceMaterial, includeSecondaryReferences,
+    includeLearningStrategy, data
   } = payload;
 
   const body = document.getElementById("outBody");
-
   const objectives = Array.isArray(data.learningObjectives) ? data.learningObjectives.filter(Boolean) : [];
   const evaluation = Array.isArray(data.evaluation) ? data.evaluation.filter(Boolean) : [];
   const assignment = Array.isArray(data.assignment) ? data.assignment.filter(Boolean) : [];
@@ -1347,6 +1045,9 @@ function renderLessonPlan(payload) {
       <h3>Lesson Plan</h3>
 
       <div class="section-block">
+        <div class="editable-line" contenteditable="true"><strong>School Name:</strong> ${escapeHtml(schoolName)}</div>
+        <div class="editable-line" contenteditable="true"><strong>Session:</strong> ${escapeHtml(session)}</div>
+        <div class="editable-line" contenteditable="true"><strong>Term:</strong> ${escapeHtml(term)}</div>
         <div class="editable-line" contenteditable="true"><strong>Week:</strong> ${escapeHtml(week)}</div>
         <div class="editable-line" contenteditable="true"><strong>Day:</strong> ${escapeHtml(day || "Not specified")}</div>
         <div class="editable-line" contenteditable="true"><strong>Date:</strong> ${escapeHtml(formattedDate)}</div>
@@ -1360,101 +1061,74 @@ function renderLessonPlan(payload) {
         <div class="editable-line" contenteditable="true"><strong>Duration:</strong> ${escapeHtml(duration)}</div>
         <div class="editable-line" contenteditable="true"><strong>Time/Period:</strong> ${escapeHtml(timePeriod || "Not specified")}</div>
         <div class="editable-line" contenteditable="true"><strong>Gender:</strong> ${escapeHtml(gender)}</div>
+        <div class="editable-line" contenteditable="true"><strong>Teacher's Name:</strong> ${escapeHtml(teacher)}</div>
       </div>
 
       <h3>Learning Objective</h3>
       <div class="section-block">
         <div class="editable-line" contenteditable="true"><strong>By the end of the lesson, the students/pupils should be able to:</strong></div>
-        ${objectives.map((item, i) => `
-          <div class="editable-line" contenteditable="true">${i + 1}. ${escapeHtml(item)}</div>
-        `).join("")}
+        ${objectives.map((item, i) => `<div class="editable-line" contenteditable="true">${i + 1}. ${escapeHtml(item)}</div>`).join("")}
       </div>
 
       ${includeRationale ? `
         <h3>Rationale</h3>
-        <div class="section-block">
-          <div class="editable-line" contenteditable="true">${nl2br(data.rationale || "")}</div>
-        </div>
+        <div class="section-block"><div class="editable-line" contenteditable="true">${nl2br(data.rationale || "")}</div></div>
       ` : ""}
 
       <h3>Previous knowledge</h3>
-      <div class="section-block">
-        <div class="editable-line" contenteditable="true">${nl2br(data.previousKnowledge || "")}</div>
-      </div>
+      <div class="section-block"><div class="editable-line" contenteditable="true">${nl2br(data.previousKnowledge || "")}</div></div>
 
       <h3>Instructional materials</h3>
-      <div class="section-block">
-        <div class="editable-line" contenteditable="true">${nl2br(data.instructionalMaterials || "")}</div>
-      </div>
+      <div class="section-block"><div class="editable-line" contenteditable="true">${nl2br(data.instructionalMaterials || "")}</div></div>
 
       ${includeGradeReferenceMaterial ? `
         <h3>Reference material</h3>
-        <div class="section-block">
-          <div class="editable-line" contenteditable="true">${nl2br(data.referenceMaterial || "")}</div>
-        </div>
+        <div class="section-block"><div class="editable-line" contenteditable="true">${nl2br(data.referenceMaterial || "")}</div></div>
       ` : ""}
 
       ${getPresentationTableHtml(stepRows, includeLearningStrategy)}
 
       <h3>Evaluation</h3>
       <div class="section-block">
-        ${evaluation.map((item, i) => `
-          <div class="editable-line" contenteditable="true">${i + 1}. ${escapeHtml(item)}</div>
-        `).join("")}
+        ${evaluation.map((item, i) => `<div class="editable-line" contenteditable="true">${i + 1}. ${escapeHtml(item)}</div>`).join("")}
       </div>
 
       <h3>Summary</h3>
-      <div class="section-block">
-        <div class="editable-line" contenteditable="true">${nl2br(data.summary || "")}</div>
-      </div>
+      <div class="section-block"><div class="editable-line" contenteditable="true">${nl2br(data.summary || "")}</div></div>
 
       <h3>Conclusion</h3>
-      <div class="section-block">
-        <div class="editable-line" contenteditable="true">${nl2br(data.conclusion || "")}</div>
-      </div>
+      <div class="section-block"><div class="editable-line" contenteditable="true">${nl2br(data.conclusion || "")}</div></div>
 
       ${includeSecondaryReferences ? `
         <h3>References</h3>
-        <div class="section-block">
-          <div class="editable-line" contenteditable="true">${nl2br(data.references || "")}</div>
-        </div>
+        <div class="section-block"><div class="editable-line" contenteditable="true">${nl2br(data.references || "")}</div></div>
       ` : ""}
 
       <h3>Assignment/Home-fun</h3>
       <div class="section-block">
-        ${assignment.map((item, i) => `
-          <div class="editable-line" contenteditable="true">${i + 1}. ${escapeHtml(item)}</div>
-        `).join("")}
+        ${assignment.map((item, i) => `<div class="editable-line" contenteditable="true">${i + 1}. ${escapeHtml(item)}</div>`).join("")}
       </div>
     </div>
   `;
-
   bindRenderedActions();
+  saveDraftLocally();
 }
 
 /* ---------------- ACTION BUTTONS ---------------- */
 
 function getPlanText() {
   const editor = document.querySelector(".lesson-editor");
-  if (editor && editor.innerText.trim()) {
-    return editor.innerText.trim();
-  }
-
+  if (editor && editor.innerText.trim()) return editor.innerText.trim();
   const outBody = document.getElementById("outBody");
-  if (outBody && outBody.innerText.trim()) {
-    return outBody.innerText.trim();
-  }
-
+  if (outBody && outBody.innerText.trim()) return outBody.innerText.trim();
   return "";
 }
-
 function copyPlan() {
   const text = getPlanText();
   if (!text) {
     alert("Generate or edit a lesson plan first.");
     return;
   }
-
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById("copyBtn");
     btn.classList.add("copied");
@@ -1467,7 +1141,6 @@ function copyPlan() {
     alert("Could not copy automatically. Please copy manually.");
   });
 }
-
 function printPlan() {
   const text = getPlanText();
   if (!text) {
@@ -1476,95 +1149,54 @@ function printPlan() {
   }
   window.print();
 }
-
 function saveAsPDF() {
   const editor = document.querySelector(".lesson-editor");
-
   if (!editor || !editor.innerText.trim()) {
     alert("Generate or edit a lesson plan first.");
     return;
   }
-
   const opt = {
     margin: 0.4,
     filename: "lesson-plan.pdf",
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      scrollY: 0
-    },
-    jsPDF: {
-      unit: "in",
-      format: "a4",
-      orientation: "portrait"
-    },
+    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
     pagebreak: { mode: ["css", "legacy"] }
   };
-
   html2pdf().set(opt).from(editor).save();
 }
-
 function submitToEmail() {
   const text = getPlanText();
   if (!text) {
     alert("Generate or edit a lesson plan first.");
     return;
   }
-
   const email = prompt("Enter the email address:");
   if (!email) return;
-
   const subject = encodeURIComponent(document.getElementById("planTitle").innerText || "Lesson Plan");
   const body = encodeURIComponent(text);
-
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
 }
-
 function generateNew() {
   document.getElementById("outputCard").classList.remove("show");
   document.getElementById("outBody").innerHTML = "";
+  localStorage.removeItem("lesson-plan-draft");
   document.getElementById("subject").focus();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-/* ---------------- BIND TOP-LEVEL BUTTONS ---------------- */
-function saveDraftLocally() {
-  const editor = document.querySelector(".lesson-editor");
-  if (!editor) return;
-  localStorage.setItem("lesson-plan-draft", 
-editor.outerHTML);
-}
+/* ---------------- STARTUP ---------------- */
 
-function restoreDraftLocally() {
-  const saved = localStorage.getItem("lesson-plan-draft");
-  const outBody = document.getElementById("outBody");
-  const outputCard = document.getElementById("outputCard");
-
-  if (saved && outBody && outputCard) {
-    outBody.className = "out-body";
-    outBody.innerHTML = saved;
-    outputCard.classList.add("show");
-    bindRenderedActions();
-  }
-}
-
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   restoreDraftLocally();
 
-  const genBtn =  
-document.getElementById("genBtn");
-  const manualBtn = 
-document.getElementById("manualBtn");
+  const genBtn = document.getElementById("genBtn");
+  const manualBtn = document.getElementById("manualBtn");
 
-  if (genBtn) genBtn.onclick = generate;
-  if (manualBtn) manualBtn.onclick = 
-renderManualTemplate;
+  if (genBtn) genBtn.addEventListener("click", generate);
+  if (manualBtn) manualBtn.addEventListener("click", renderManualTemplate);
 });
-}
-</script>
 
-<script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", async () => {
     try {
@@ -1576,6 +1208,5 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>
