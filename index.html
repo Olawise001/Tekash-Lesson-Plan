@@ -1464,8 +1464,14 @@ window.addEventListener("load", restoreDraftLocally);
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", async function () {
     try {
-      await navigator.serviceWorker.register("/sw.js");
+      const reg = await navigator.serviceWorker.register("/sw.js");
       console.log("Service worker registered");
+
+      reg.update();
+
+      navigator.serviceWorker.addEventListener("controllerchange", function () {
+        window.location.reload();
+      });
     } catch (error) {
       console.error("Service worker registration failed:", error);
     }
