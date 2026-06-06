@@ -1,4 +1,4 @@
-const CACHE_NAME = "lesson-plan-pwa-v3";
+const CACHE_NAME = "lesson-plan-pwa-v4";
 
 const STATIC_FILES = [
   "/",

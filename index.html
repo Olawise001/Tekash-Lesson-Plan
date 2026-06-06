@@ -404,6 +404,118 @@
     color: var(--green-dark);
   }
 
+  /* ---- Settings / History modals ---- */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    width: 100%;
+    max-width: 460px;
+    overflow: hidden;
+  }
+  .modal-head {
+    padding: 16px 20px;
+    background: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-head h3 { font-family: 'Lora', serif; color: #fff; font-size: 15px; font-weight: 600; }
+  .modal-close { background: none; border: none; color: rgba(255,255,255,0.7); font-size: 22px; cursor: pointer; line-height: 1; padding: 0 4px; }
+  .modal-close:hover { color: #fff; }
+  .modal-body { padding: 20px; }
+  .modal-body p { font-size: 13px; color: var(--text-mid); margin-bottom: 14px; line-height: 1.55; }
+  .modal-body .form-group { margin-bottom: 14px; }
+  .modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
+  .btn-primary { padding: 9px 20px; border-radius: var(--radius); border: none; background: var(--green-dark); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; }
+  .btn-primary:hover { background: var(--green-mid); }
+  .btn-ghost { padding: 9px 20px; border-radius: var(--radius); border: 1px solid var(--border-strong); background: #fff; color: var(--text-mid); font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; }
+  .btn-ghost:hover { background: var(--cream); }
+  .btn-danger { padding: 9px 20px; border-radius: var(--radius); border: none; background: #fdecea; color: #c0392b; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; }
+  .btn-danger:hover { background: #f9d0cc; }
+
+  /* Topbar icon buttons */
+  .topbar-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 7px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .topbar-icon-btn:hover { background: rgba(255,255,255,0.12); }
+  .topbar-icon-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: rgba(255,255,255,0.78);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .topbar-actions { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+  .topbar-sub { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+  /* History list */
+  .history-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .history-item:last-child { border-bottom: none; }
+  .history-item:hover { background: var(--green-pale); }
+  .history-item-info { flex: 1; min-width: 0; }
+  .history-item-title { font-size: 13px; font-weight: 500; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .history-item-meta { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
+  .history-item-del { background: none; border: none; color: var(--text-soft); cursor: pointer; font-size: 18px; padding: 2px 6px; border-radius: 4px; line-height: 1; flex-shrink: 0; }
+  .history-item-del:hover { color: #c0392b; background: #fdecea; }
+  .history-empty { padding: 20px; font-size: 13px; color: var(--text-soft); font-style: italic; text-align: center; }
+  #historyList { max-height: 360px; overflow-y: auto; }
+
+  /* Signature section */
+  .signature-section {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 2px solid var(--border-strong);
+  }
+  .signature-section h3 { margin-bottom: 14px; }
+  .signature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  .signature-box { display: flex; flex-direction: column; gap: 4px; }
+  .signature-label { font-size: 11px; font-weight: 600; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+  .signature-space {
+    border-bottom: 1px solid var(--text-dark);
+    min-height: 44px;
+    display: block;
+    cursor: text;
+  }
+  .signature-name { font-size: 12px; color: var(--text-mid); margin-top: 5px; font-style: italic; }
+
+  @media (max-width: 700px) {
+    .signature-grid { grid-template-columns: 1fr; gap: 18px; }
+  }
+
   .dots::after {
     content: '';
     animation: dots 1.4s infinite;
@@ -530,7 +642,15 @@
     </svg>
   </div>
   <span class="topbar-name">Lesson Plan Generator</span>
-  <span class="topbar-sub">AI-Powered · For Teachers</span>
+  <div class="topbar-actions">
+    <span class="topbar-sub">AI-Powered · For Teachers</span>
+    <button class="topbar-icon-btn" onclick="openHistoryModal()" title="Saved Plans">
+      <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+    </button>
+    <button class="topbar-icon-btn" onclick="openSettingsModal()" title="API Key Settings">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </div>
 </div>
 
 <div class="page">
@@ -702,14 +822,207 @@
       <button class="act-btn" type="button" onclick="saveAsPDF()">Save as PDF</button>
       <button class="act-btn" type="button" onclick="saveAsWord()">Save as Word</button>
       <button class="act-btn" type="button" onclick="submitToEmail()">Submit to Email</button>
+      <button class="act-btn" type="button" onclick="shareWhatsApp()" style="color:#128C7E;border-color:#128C7E;">Share WhatsApp</button>
+      <button class="act-btn" id="savePlanBtn" type="button" onclick="savePlanToHistory(this)">Save Plan</button>
       <button class="act-btn" type="button" onclick="generateNew()">New plan</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsModal" onclick="handleModalOverlayClick(event, 'settingsModal')">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>API Key Settings</h3>
+      <button class="modal-close" onclick="closeSettingsModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <p>Enter your Anthropic API key to enable AI generation. Your key is saved only in this browser — it never leaves your device.</p>
+      <p>Get your key at <strong>console.anthropic.com</strong> → API Keys.</p>
+      <div class="form-group">
+        <label>Anthropic API Key</label>
+        <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-...">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-danger" onclick="clearApiKey()">Remove Key</button>
+      <button class="btn-ghost" onclick="closeSettingsModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveApiKey()">Save Key</button>
+    </div>
+  </div>
+</div>
+
+<!-- History Modal -->
+<div class="modal-overlay" id="historyModal" onclick="handleModalOverlayClick(event, 'historyModal')">
+  <div class="modal" style="max-width:520px;">
+    <div class="modal-head">
+      <h3>Saved Plans</h3>
+      <button class="modal-close" onclick="closeHistoryModal()">×</button>
+    </div>
+    <div id="historyList"></div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeHistoryModal()">Close</button>
     </div>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-const API_KEY = "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";
+/* ----------- API KEY (stored in localStorage, never in source code) ----------- */
+function getApiKey() {
+  return localStorage.getItem("lesson-plan-api-key") || "";
+}
+
+function openSettingsModal() {
+  const modal = document.getElementById("settingsModal");
+  modal.classList.add("open");
+  const input = document.getElementById("apiKeyInput");
+  const key = getApiKey();
+  input.value = key ? key.slice(0, 14) + "••••••••" + key.slice(-4) : "";
+  input.dataset.hasKey = key ? "1" : "0";
+}
+
+function closeSettingsModal() {
+  document.getElementById("settingsModal").classList.remove("open");
+}
+
+function saveApiKey() {
+  const input = document.getElementById("apiKeyInput");
+  const val = input.value.trim();
+  if (val.includes("••••")) {
+    closeSettingsModal();
+    return;
+  }
+  if (!val) { alert("Please enter an API key."); return; }
+  if (!val.startsWith("sk-ant-")) {
+    alert("That doesn't look like an Anthropic API key. It should start with sk-ant-");
+    return;
+  }
+  localStorage.setItem("lesson-plan-api-key", val);
+  input.value = val.slice(0, 14) + "••••••••" + val.slice(-4);
+  input.dataset.hasKey = "1";
+  alert("API key saved securely in your browser.");
+  closeSettingsModal();
+}
+
+function clearApiKey() {
+  if (!confirm("Remove your saved API key?")) return;
+  localStorage.removeItem("lesson-plan-api-key");
+  document.getElementById("apiKeyInput").value = "";
+  alert("API key removed.");
+}
+
+function handleModalOverlayClick(event, modalId) {
+  if (event.target === document.getElementById(modalId)) {
+    document.getElementById(modalId).classList.remove("open");
+  }
+}
+
+/* ----------- HISTORY ----------- */
+function savePlanToHistory(btn) {
+  const editor = document.querySelector(".lesson-editor");
+  if (!editor || !editor.innerText.trim()) { alert("Generate or edit a lesson plan first."); return; }
+  const title = document.getElementById("planTitle").textContent || "Lesson Plan";
+  const info = document.getElementById("planInfo").textContent || "";
+  const history = JSON.parse(localStorage.getItem("lesson-plan-history") || "[]");
+  history.unshift({
+    id: Date.now(),
+    title,
+    info,
+    html: editor.outerHTML,
+    savedAt: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+  });
+  history.splice(10);
+  localStorage.setItem("lesson-plan-history", JSON.stringify(history));
+  if (btn) {
+    btn.textContent = "Saved ✓";
+    setTimeout(() => { btn.textContent = "Save Plan"; }, 2200);
+  }
+}
+
+function openHistoryModal() {
+  document.getElementById("historyModal").classList.add("open");
+  renderHistoryList();
+}
+
+function closeHistoryModal() {
+  document.getElementById("historyModal").classList.remove("open");
+}
+
+function renderHistoryList() {
+  const list = document.getElementById("historyList");
+  const history = JSON.parse(localStorage.getItem("lesson-plan-history") || "[]");
+  if (!history.length) {
+    list.innerHTML = '<div class="history-empty">No saved plans yet.<br>Generate a plan and click "Save Plan".</div>';
+    return;
+  }
+  list.innerHTML = history.map((item, i) => `
+    <div class="history-item" onclick="loadHistoryItem(${i})">
+      <div class="history-item-info">
+        <div class="history-item-title">${escapeHtml(item.title)}</div>
+        <div class="history-item-meta">${escapeHtml(item.info)} · ${escapeHtml(item.savedAt)}</div>
+      </div>
+      <button class="history-item-del" onclick="deleteHistoryItem(event,${i})" title="Delete">×</button>
+    </div>
+  `).join("");
+}
+
+function loadHistoryItem(index) {
+  const history = JSON.parse(localStorage.getItem("lesson-plan-history") || "[]");
+  const item = history[index];
+  if (!item) return;
+  const outBody = document.getElementById("outBody");
+  const outputCard = document.getElementById("outputCard");
+  outBody.className = "out-body";
+  outBody.innerHTML = item.html;
+  outputCard.classList.add("show");
+  document.getElementById("planTitle").textContent = item.title;
+  document.getElementById("planInfo").textContent = item.info;
+  bindRenderedActions();
+  closeHistoryModal();
+  outputCard.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function deleteHistoryItem(event, index) {
+  event.stopPropagation();
+  const history = JSON.parse(localStorage.getItem("lesson-plan-history") || "[]");
+  history.splice(index, 1);
+  localStorage.setItem("lesson-plan-history", JSON.stringify(history));
+  renderHistoryList();
+}
+
+/* ----------- WHATSAPP SHARE ----------- */
+function shareWhatsApp() {
+  const text = getPlanText();
+  if (!text) { alert("Generate or edit a lesson plan first."); return; }
+  window.open("https://wa.me/?text=" + encodeURIComponent(text.slice(0, 2000)), "_blank");
+}
+
+/* ----------- SIGNATURE SECTION ----------- */
+function getSignatureHtml(teacher) {
+  return `
+    <div class="signature-section">
+      <h3>Signatures</h3>
+      <div class="signature-grid">
+        <div class="signature-box">
+          <div class="signature-label">Class Teacher</div>
+          <div class="signature-space" contenteditable="true"></div>
+          <div class="signature-name" contenteditable="true">${escapeHtml(teacher || "")}</div>
+        </div>
+        <div class="signature-box">
+          <div class="signature-label">HOD / Subject Head</div>
+          <div class="signature-space" contenteditable="true"></div>
+          <div class="signature-name" contenteditable="true"></div>
+        </div>
+        <div class="signature-box">
+          <div class="signature-label">Date Approved</div>
+          <div class="signature-space" contenteditable="true"></div>
+          <div class="signature-name" contenteditable="true"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
 
 function isGradeSchool(grade) { grade = String(grade || "").trim(); return grade.startsWith("Grade"); }
 function isNursery(grade) { grade = String(grade || "").trim(); return grade.startsWith("Nursery"); }
@@ -929,8 +1242,9 @@ async function generate() {
 
   err.style.display = "none";
 
-  if (!API_KEY || API_KEY.includes("PASTE_YOUR_REAL_API_KEY_HERE")) {
-    err.textContent = "Please paste your real API key inside the script.";
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    err.textContent = "No API key found. Click the ⚙ settings icon in the top bar to enter your Anthropic API key.";
     err.style.display = "block";
     return;
   }
@@ -1038,7 +1352,7 @@ Need learning strategy column: ${includeLearningStrategy ? "yes" : "no"}
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": API_KEY,
+          "x-api-key": apiKey,
           "anthropic-version": "2023-06-01",
           "anthropic-dangerous-direct-browser-access": "true"
         },
@@ -1204,6 +1518,8 @@ function renderManualTemplate() {
         <div class="editable-line" contenteditable="true">2. </div>
         <div class="editable-line" contenteditable="true">3. </div>
       </div>
+
+      ${getSignatureHtml(teacher)}
     </div>
   `;
   bindRenderedActions();
@@ -1303,6 +1619,8 @@ function renderLessonPlan(payload) {
       <div class="section-block">
         ${assignment.map((item, i) => `<div class="editable-line" contenteditable="true">${i + 1}. ${escapeHtml(item)}</div>`).join("")}
       </div>
+
+      ${getSignatureHtml(teacher)}
     </div>
   `;
   bindRenderedActions();
